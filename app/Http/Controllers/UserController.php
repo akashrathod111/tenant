@@ -37,6 +37,9 @@ class UserController extends Controller
         if ($user->hasRole('super_admin')) {
             $roles = Role::pluck('name', 'id')->all();
             $admins = User::where('created_by_type', 'admin')->pluck('name', 'id')->all();
+        } elseif ($user->hasRole('admin')) {
+            $roles = Role::where('name', 'user')->pluck('name', 'id')->all();
+            $admins = User::where('created_by_type', 'admin')->pluck('name', 'id')->all();
         } else {
             $roles = Role::where('name', '!=', 'super_admin')->pluck('name', 'id')->all();
             $admins = [];
@@ -97,12 +100,15 @@ class UserController extends Controller
         if ($authUser->hasRole('super_admin')) {
             $roles = Role::pluck('name', 'id')->all();
             $admins = User::where('created_by_type', 'admin')->pluck('name', 'id')->all();
+        } elseif ($user->hasRole('admin')) {
+            $roles = Role::where('name', 'user')->pluck('name', 'id')->all();
+            $admins = User::where('created_by_type', 'admin')->pluck('name', 'id')->all();
         } else {
             $roles = Role::where('name', '!=', 'super_admin')->pluck('name', 'id')->all();
             $admins = [];
         }
 
-        return view('users.edit', compact('user', 'roles', 'userRole', 'isSuperAdmin','admins'));
+        return view('users.edit', compact('user', 'roles', 'userRole', 'isSuperAdmin', 'admins'));
     }
 
     public function update(Request $request, $id): RedirectResponse
