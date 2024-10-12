@@ -17,7 +17,7 @@ class DashboardController extends Controller
             $totalAdmins = User::role('admin')->count();
         } elseif ($user->hasRole('admin')) {
             $totalUsers = User::where('created_by_id', $user->id)
-                              ->where('created_by_type', 'user')
+                              ->where('created_by_type', 'admin')
                               ->count();
             $totalSuperAdmins = 0;
             $totalAdmins = 0;
