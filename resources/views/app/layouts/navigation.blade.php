@@ -15,26 +15,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
-                @role('super_admin')
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
-                            {{ __('Roles') }}
-                        </x-nav-link>
-                    </div>
-                @endrole
-                @role('super_admin|admin')
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                            {{ __('Users') }}
-                        </x-nav-link>
-                    </div>
-                @endrole
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tenants.index')" :active="request()->routeIs('tenants.index')">
-                        {{ __('Tenants') }}
+                    @role('admin')
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('Users') }}
                     </x-nav-link>
+                    @endrole
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
