@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::group(['middleware' => ['role:super_admin']], function() {
         Route::resource('roles', RoleController::class);
+        Route::resource('tenants', TenantController::class);
     });
     Route::group(['middleware' => ['role:super_admin|admin']], function() {
         Route::resource('users', UserController::class);
     });
-
 });
 
 require __DIR__.'/auth.php';
